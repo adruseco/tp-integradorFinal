@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                
+    <h:form id="frmBusquedaAvanzadaReceta">
+     
+            <div class="p-col-12" >
+                <h2>Busqueda Avanzada</h2>
+            </div>
+            <h:panelGrid columns="4" cellpadding="5">
+           
+                <p:outputLabel for="precioMinimo" value="Precio Minimo:" />
+                <p:inputNumber  id="precioMinimo"  value="#{recetaController.precioMinimo}" 
+                                symbol="AR$" symbolPosition="s" decimalSeparator="," thousandSeparator=".">
+                </p:inputNumber>
+            
+                <p:outputLabel for="precioMaximo" value="Precio Maximo:" />
+                <p:inputNumber id="precioMaximo"  value="#{recetaController.precioMaximo}" 
+                             symbol="AR$" symbolPosition="s" decimalSeparator="," thousandSeparator=".">
+                </p:inputNumber>
+           
+           
+                <p:outputLabel for="fechaIni" value="Desde Fecha:" />
+                <p:inputMask id="fechaIni"  value="#{recetaController.fechaIni}" mask="99/99/9999">
+                   <f:convertDateTime pattern="dd/MM/yyyy" />
+                </p:inputMask>
+            
+                <p:outputLabel for="fechaFin" value="Hasta Fecha:" />
+                <p:inputMask id="fechaFin"  value="#{recetaController.fechaFinal}" mask="99/99/9999">
+                     <f:convertDateTime pattern="dd/MM/yyyy" />
+                </p:inputMask>   
+                           
+                <p:outputLabel for="autor" value="Autor:" />
+                <p:selectOneMenu id="autor" value="#{recetaController.autorSeleccionado}" panelStyle="width:220px"
+                                     effect="fade" style="width:200px" converter="autorConverter">
+                <f:selectItems value="#{autorController.listaAutores}" var="unAutor" itemLabel="#{unAutor.nombre}" itemValue="#{unAutor}" />
+                </p:selectOneMenu>                
+           
+                <p:outputLabel for="ingrediente" value="Ingrediente:" />
+                <p:selectOneMenu id="ingrediente" value="#{recetaController.ingredienteSeleccionado}" panelStyle="width:220px"
+                                     effect="fade" style="width:200px" converter="ingredienteConverter">
+                <f:selectItems value="#{ingredienteController.listaIngredientes}" var="unIngrediente" itemLabel="#{unIngrediente.descripcion}" itemValue="#{unIngrediente}" />
+                </p:selectOneMenu>                
+                 
+                 <p:commandButton value="Buscar" action="#{recetaController.buscar()}" styleClass="btn btn-primary" update="formListadoRecetaBusqueda:tblListaRecetaBusqueda" >
+                 </p:commandButton>   
+        </h:panelGrid>                             
+      
+    </h:form>  
+    
+</ui:composition>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"                                
+                template="./template01.xhtml">
+
+
+    <ui:define name="top">
+        <h1>Gestion de recetas</h1>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmDatosIngredientes">
+        <div class="p-grid">
+            <div class="p-col-12" >
+                <h2>Formulario de ingreso de datos </h2>
+            </div>
+            <div class="p-col-4" >
+                <p:outputLabel for="nombre" value="Nombre:" />
+            </div>
+            <div class="p-col-8" >
+                <p:inputText id="nombre" required="true" value="#{ingredienteController.ingredienteSeleccionado.descripcion}" disabled="#{empty ingredienteController.ingredienteSeleccionado}"/>
+            </div>
+              <div class="p-col-4" >
+                <p:outputLabel for="costo" value="Costo:" />
+            </div>
+            <div class="p-col-8" >
+                <p:inputText id="costo" required="true" value="#{ingredienteController.ingredienteSeleccionado.costo}" disabled="#{empty ingredienteController.ingredienteSeleccionado}"/>
+            </div>
+            <div class="p-col-4" >
+                <p:commandButton value="Guardar" action="#{ingredienteController.guardar}" ajax="false" disabled="#{empty ingredienteController.ingredienteSeleccionado}"></p:commandButton>
+            </div>
+            <div class="p-col-4" >
+                <p:commandButton value="Nuevo" action="#{ingredienteController.nuevo}" update="frmDatosIngredientes" disabled="#{not empty ingredienteController.ingredienteSeleccionado}"></p:commandButton>
+            </div>                
+        </div>
+    </h:form>
+    </ui:define>
+
+</ui:composition>

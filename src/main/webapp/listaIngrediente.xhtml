@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"                
+                template="./template01.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="top">
+        Ingredientes
+    </ui:define>
+
+
+    <ui:define name="content">
+        <h:form id="frmListaIngredientes">
+            <p:dataTable id="tblListaIngredientes" var="unIngrediente" value="#{ingredienteController.listaIngredientes}" selection="#{ingredienteController.ingredienteSeleccionado}" rowKey="#{unIngrediente.id}">
+                <f:facet name="header">
+                Lista de ingredientes
+            </f:facet>
+            <p:column selectionMode="single" style="width:16px;text-align:center"/>
+            <p:column headerText="Id">
+                <h:outputText value="#{unIngrediente.id}" />
+            </p:column>
+            <p:column headerText="Nombre">
+                <h:outputText value="#{unIngrediente.descripcion}" />
+            </p:column>
+            <p:column headerText="Costo">
+                <h:outputText value="#{unIngrediente.costo}" />
+            </p:column>            
+            <f:facet name="footer">
+                <p:commandButton process="tblListaIngredientes" action="altaIngrediente.xhtml" icon="ui-icon-search" value="Seleccionar" />
+            </f:facet>
+        </p:dataTable>
+    </h:form>    </ui:define>
+
+</ui:composition>

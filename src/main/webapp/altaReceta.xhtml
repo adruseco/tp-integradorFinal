@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template01.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="top">
+        <h1>Gestion de recetas</h1>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmDatosReceta">
+            <p:growl id="growl" showDetail="true" sticky="true" />  
+            <h:messages showDetail="true"></h:messages>
+            <div class="p-grid">
+                <div class="p-col-12" >
+                    <h2>Crear una receta</h2>
+                </div>
+                <div class="p-col-12" >
+                    <p:outputLabel for="titulo" value="Titulo:" />
+                </div>
+                <div class="p-col-12" >
+                    <p:inputText id="titulo" required="true" value="#{recetaController.recetaSeleccionada.titulo}" disabled="#{empty recetaController.recetaSeleccionada}"/>
+                </div>
+                <div class="p-col-12" >
+                    <p:outputLabel for="descr" value="Descripcion:" />
+                </div>
+                <div class="p-col-12" >
+                    <p:textEditor id="descr" widgetVar="descrip" rendered="#{not empty recetaController.recetaSeleccionada}" value="#{recetaController.recetaSeleccionada.descripcion}"  height="300" style="margin-bottom:10px"/>
+                    <h:outputText value="Cree una nueva receta o seleccione una para editar la descripcion" rendered="#{empty recetaController.recetaSeleccionada}"/> 
+                </div>
+                <div class="p-col-12" >
+                    <p:outputLabel for="inputPrecio" value="Precio:" />
+                </div>
+                <div class="p-col-12" >
+                    <p:inputNumber id="inputPrecio" value="#{recetaController.recetaSeleccionada.precio}" disabled="#{empty recetaController.recetaSeleccionada}" symbol="AR$" symbolPosition="s" 
+                               decimalSeparator="," thousandSeparator=".">  
+                    </p:inputNumber>  
+                </div>
+                <div class="p-col-12" >
+                    <p:outputLabel for="fecha" value="Fecha:" />
+                </div>
+                <div class="p-col-12" >
+                    <p:inputMask id="fecha" value="#{recetaController.recetaSeleccionada.fechaCreacion}" disabled="#{empty recetaController.recetaSeleccionada}"  mask="99/99/9999" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </p:inputMask>
+                </div>
+                <div class="p-col-12" >
+                    <p:outputLabel for="autor" value="Autor:" />
+                </div>
+                <div class="p-col-12" >
+                    <p:selectOneMenu id="autor" value="#{recetaController.autorSeleccionado}" panelStyle="width:220px"
+                                     effect="fade" style="width:200px" converter="autorConverter">
+                        <f:selectItems value="#{autorController.listaAutores}" var="unAutor" itemLabel="#{unAutor.nombre}" itemValue="#{unAutor}" />
+                    </p:selectOneMenu>                
+                </div>
+                <div class="p-col-12" >
+                    <p:outputLabel for="ingredientes" value="Ingredientes:" />
+                </div>
+                <div class="p-col-12" >
+                    <p:pickList id="ingredientes" value="#{recetaController.ingredientesDisponibles}" disabled="#{empty recetaController.recetaSeleccionada}" converter="ingredienteConverter"  var="unIngrediente" itemLabel="#{unIngrediente.descripcion}" itemValue="#{unIngrediente}" />
+                </div>
+
+                <div class="p-col-12" >
+                    <p:commandButton value="Guardar" action="#{recetaController.guardar}" ajax="false" disabled="#{empty recetaController.recetaSeleccionada}"></p:commandButton>
+                </div>
+                <div class="p-col-12" >
+                    <p:commandButton value="Nuevo" action="#{recetaController.nuevo}" update="frmDatosReceta" disabled="#{not empty recetaController.recetaSeleccionada}"></p:commandButton>
+                </div>                
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

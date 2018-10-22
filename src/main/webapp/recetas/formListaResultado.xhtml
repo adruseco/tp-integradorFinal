@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"                
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+     <h:form id="formListadoRecetaBusqueda">
+        <p:dataTable id="tblListaRecetaBusqueda" var="unaReceta" value="#{recetaController.resultadoBusqueda}" selection="#{recetaController.recetaSeleccionada}" rowKey="#{unaReceta.id}" rendered="true">
+            <f:facet name="header">
+              Resultado de la Busqueda Avanzada
+            </f:facet>
+            <p:column headerText="Id">
+                <h:outputText value="#{unaReceta.id}" />
+            </p:column>
+            <p:column headerText="Titulo">
+                <h:outputText value="#{unaReceta.titulo}" />
+            </p:column>
+            <p:column headerText="Precio">
+                <h:outputText value="#{unaReceta.precio}" />
+            </p:column>            
+            <p:column headerText="Fecha de Creacion">
+                <h:outputText value="#{unaReceta.fechaCreacion}" />
+            </p:column>
+            <p:column headerText="Autor">
+                <h:outputText value="#{unaReceta.autor.nombre}" />
+            </p:column>
+			
+        </p:dataTable>
+    </h:form>
+
+</ui:composition>
