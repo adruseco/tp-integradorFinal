@@ -27,6 +27,7 @@ public class RecetaConverter implements Converter{
         r.setDescripcion(datos[1]);
         r.setTitulo(datos[2]);
         r.setPrecio(Double.valueOf(datos[3]));
+        System.out.println("en objeto "+r.toString()+ " < "+string+">"); 
         return r;
     
     }
